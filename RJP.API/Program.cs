@@ -1,6 +1,7 @@
 using RJP.DAL;
 using Microsoft.EntityFrameworkCore;
-
+using RJP.Application.AccountUseCases;
+using RJP.Application.TransactionUseCases;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
+
+builder.Services.AddTransient<IOpenAccountService, OpenAccountService>();
+builder.Services.AddTransient<ICreateTransactionService, CreateTransactionService>();
 
 var app = builder.Build();
 

@@ -2,6 +2,11 @@
 
 public class Account
 {
+    public Account()
+    {
+        Transactions = new List<Transaction>();
+    }
+
     public int AccountId { get; set; }
     public double InitialCredit { get; set; }
     public int CutomerId { get; set; }

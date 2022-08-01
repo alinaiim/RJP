@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RJP.API.Dtos;
+using RJP.Application.AccountUseCases;
 
 namespace RJP.API.Controllers;
 
@@ -7,9 +8,19 @@ namespace RJP.API.Controllers;
 [Route("[controller]")]
 public class CustomerController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult OpenAccount([FromQuery]CustomerReadDto dto)
+    private readonly IOpenAccountService _openAccountService;
+    public CustomerController(IOpenAccountService openAccountService)
     {
-        return Ok(dto);
+        _openAccountService = openAccountService;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> OpenAccount(CustomerReadDto dto)
+    {
+        var response = await _openAccountService.Execute(dto.CustomerId, dto.InitialCredit);
+        if (response.Success)
+            return Ok();
+        else if (response.Message == "Customer not found") return NotFound(response.Message);
+        return BadRequest();
     }
 }

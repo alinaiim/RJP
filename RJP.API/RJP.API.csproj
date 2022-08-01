@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RJP.Application\RJP.Application.csproj" />
     <ProjectReference Include="..\RJP.DAL\RJP.DAL.csproj" />
   </ItemGroup>
 

@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJP.Domain", "RJP.Domain\RJ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJP.Application", "RJP.Application\RJP.Application.csproj", "{A7DC17FB-0425-42BD-9287-A5432F5B3149}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJP.Tests", "RJP.Tests\RJP.Tests.csproj", "{CFACFB98-65A6-41F1-9469-FF074298533C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJP.Tests", "RJP.Tests\RJP.Tests.csproj", "{CFACFB98-65A6-41F1-9469-FF074298533C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E86845A6-E665-4889-98EF-449EBFAFA369}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.md = ReadMe.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

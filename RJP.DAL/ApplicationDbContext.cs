@@ -17,5 +17,6 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<Customer>().HasData(new Customer() { CustomerId = 1, FirstName = "Ali", LastName = "Naim" });
     }
 }

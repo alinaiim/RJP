@@ -20,6 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddTransient<IOpenAccountService, OpenAccountService>();
 builder.Services.AddTransient<ICreateTransactionService, CreateTransactionService>();
+builder.Services.AddTransient<IShowAccountsInfoService, ShowAccountsInfoService>();
 
 var app = builder.Build();
 

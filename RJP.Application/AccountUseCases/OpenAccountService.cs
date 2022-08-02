@@ -26,11 +26,12 @@ public class OpenAccountService : IOpenAccountService
                 throw new CustomerDoesNotExistException("Customer not found");
 
             Account account = new Account() { CutomerId = customerId, InitialCredit = initialCredit };
+            customer.Accounts.Add(account);
+            await _context.SaveChangesAsync();
             if (initialCredit != 0)
                 await _createTransactionService.Execute(account.AccountId, "Initial Transaction");
 
-            customer.Accounts.Add(account);
-            await _context.SaveChangesAsync();
+            
 
             response.Success = true;
             response.Message = "Account opened successfully";

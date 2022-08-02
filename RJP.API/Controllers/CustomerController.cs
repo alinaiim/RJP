@@ -9,9 +9,11 @@ namespace RJP.API.Controllers;
 public class CustomerController : ControllerBase
 {
     private readonly IOpenAccountService _openAccountService;
-    public CustomerController(IOpenAccountService openAccountService)
+    private readonly IShowAccountsInfoService _showAccountsInfoService;
+    public CustomerController(IOpenAccountService openAccountService, IShowAccountsInfoService showAccountsInfoService)
     {
         _openAccountService = openAccountService;
+        _showAccountsInfoService = showAccountsInfoService;
     }
 
     [HttpPost]
@@ -19,7 +21,16 @@ public class CustomerController : ControllerBase
     {
         var response = await _openAccountService.Execute(dto.CustomerId, dto.InitialCredit);
         if (response.Success)
-            return Ok(response.Payload);
+        {
+            AccountResponseDto accountResponse = new AccountResponseDto()
+            {
+                AccountId = response.Payload.AccountId,
+                FirstName = response.Payload.Customer.FirstName,
+                LastName = response.Payload.Customer.LastName,
+                InitialCredit = response.Payload.InitialCredit
+            };
+            return Ok(accountResponse);
+        }
         else if (response.Message == "Customer not found") return NotFound(response.Message);
         return BadRequest();
     }
@@ -27,6 +38,19 @@ public class CustomerController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAccountsInformation(int customerId)
     {
-        return Ok();
+        var response = await _showAccountsInfoService.Execute(customerId);
+        if (response.Success)
+        {
+            IEnumerable<AccountResponseDto> accounts = response.Payload.Select(a => new AccountResponseDto()
+            {
+                AccountId = a.AccountId,
+                FirstName = a.Customer.FirstName,
+                InitialCredit = a.InitialCredit,
+                LastName = a.Customer.LastName
+            });
+            return Ok(accounts);
+        }
+        else if (response.Message == "Customer not found") return NotFound(response.Message);
+        return BadRequest();
     }
 }

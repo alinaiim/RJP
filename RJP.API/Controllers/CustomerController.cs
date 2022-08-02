@@ -19,8 +19,14 @@ public class CustomerController : ControllerBase
     {
         var response = await _openAccountService.Execute(dto.CustomerId, dto.InitialCredit);
         if (response.Success)
-            return Ok();
+            return Ok(response.Payload);
         else if (response.Message == "Customer not found") return NotFound(response.Message);
         return BadRequest();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAccountsInformation(int customerId)
+    {
+        return Ok();
     }
 }

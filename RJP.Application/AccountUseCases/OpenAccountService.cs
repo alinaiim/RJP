@@ -29,7 +29,7 @@ public class OpenAccountService : IOpenAccountService
             if (initialCredit != 0)
                 await _createTransactionService.Execute(account.AccountId, "Initial Transaction");
 
-            _context.Accounts.Add(account);
+            customer.Accounts.Add(account);
             await _context.SaveChangesAsync();
 
             response.Success = true;

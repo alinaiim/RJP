@@ -2,9 +2,12 @@
 
 public class Customer
 {
+    public Customer()
+    {
+        Accounts = new List<Account>();
+    }
     public int CustomerId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public int? AccountId { get; set; }
-    public Account? Account { get; set; }
+    public IList<Account> Accounts { get; set; }
 }
